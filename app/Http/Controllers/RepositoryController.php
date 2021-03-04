@@ -20,4 +20,11 @@ class RepositoryController extends Controller
 
     return redirect()->route('repositories.edit', $repository);
   }
+
+  public function destroy(Repository $repository)
+  {
+    $repository->delete();
+
+    return redirect()->route('repositories.index');
+  }
 }
