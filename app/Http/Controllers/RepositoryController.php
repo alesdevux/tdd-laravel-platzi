@@ -2,28 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RepositoryRequest;
 use App\Models\Repository;
-use Illuminate\Http\Request;
 
 class RepositoryController extends Controller
 {
-  public function store(Request $request)
+  public function store(RepositoryRequest $request)
   {
-    $request->validate([
-      'url' => 'required',
-      'description' => 'required'
-    ]);
     $request->user()->repositories()->create($request->all());
 
     return redirect()->route('repositories.index');
   }
 
-  public function update(Request $request, Repository $repository)
+  public function update(RepositoryRequest $request, Repository $repository)
   {
-    $request->validate([
-      'url' => 'required',
-      'description' => 'required'
-    ]);
     $repository->update($request->all());
 
     return redirect()->route('repositories.edit', $repository);
