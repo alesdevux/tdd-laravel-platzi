@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\RepositoryRequest;
 use App\Models\Repository;
+use Illuminate\Http\Request;
 
 class RepositoryController extends Controller
 {
@@ -25,8 +26,12 @@ class RepositoryController extends Controller
     return redirect()->route('repositories.edit', $repository);
   }
 
-  public function destroy(Repository $repository)
+  public function destroy(Request $request, Repository $repository)
   {
+    if ($request->user()->id != $repository->user_id) {
+      abort(403);
+    }
+
     $repository->delete();
 
     return redirect()->route('repositories.index');
