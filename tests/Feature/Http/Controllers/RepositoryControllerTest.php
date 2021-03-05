@@ -50,6 +50,18 @@ class RepositoryControllerTest extends TestCase
         ->assertSee($repository->url);
     }
 
+    public function test_create()
+    {
+      $this->withoutExceptionHandling();
+      
+      $user = User::factory()->create();
+
+      $this
+        ->actingAs($user)
+        ->get('repositories/create')
+        ->assertStatus(200);
+    }
+
     public function test_store()
     {
       $this->withoutExceptionHandling();
