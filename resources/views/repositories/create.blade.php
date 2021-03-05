@@ -21,8 +21,7 @@
           </label>
           <textarea
             class="form-input w-full rounded-md shadow-sm"
-            type="text" name="description">
-          </textarea>
+            type="text" name="description"></textarea>
 
           <hr class="my-4">
 
